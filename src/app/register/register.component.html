@@ -1,0 +1,92 @@
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="container1"
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="1px"
+        fxLayoutGap.xs="0">
+
+        <div class="item item-1" fxFlex="50%">
+            <mat-form-field>
+                <input matInput placeholder="First Name" formControlName="firstName">
+                <mat-error *ngIf="myForm.get('firstName').hasError('required') && myForm.controls.firstName.touched">
+                    First Name is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="item item-2" fxFlex="50%">
+            <mat-form-field>
+                <input matInput placeholder="Last Name" formControlName="lastName">
+                <mat-error *ngIf="myForm.controls.lastName.invalid && myForm.controls.lastName.touched">
+                    Last Name is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="container2"
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
+
+        <div class="item item-1" fxFlex="50%">
+            <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="myForm.controls.email.invalid && myForm.controls.email.touched">
+                    Email is not valid.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="item item-2" fxFlex="50%">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Phone No" formControlName="phone">
+                <mat-error *ngIf="myForm.controls.phone.invalid && myForm.controls.phone.touched">
+                    Phone No cannot be greater than 10.
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="container2"
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
+        <div class="item item-1" fxFlex="50%">
+            <mat-form-field>
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="country">
+                <mat-option *ngFor="let country of countries" [value]="country.value">
+                    {{country.viewValue}}
+                </mat-option>
+                </mat-select>
+                <mat-error *ngIf="myForm.controls.country.invalid">
+                    Country is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="item item-2" fxFlex="50%">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Department Name" formControlName="deptName">
+                <mat-error *ngIf="myForm.controls.deptName.invalid && myForm.controls.deptName.touched">
+                    Department field is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+      </div>
+
+      <button *ngIf="registerFlag" mat-raised-button	type="submit" color="primary" [disabled]="myForm.invalid">
+        Submit
+      </button>
+
+      <button *ngIf="updateFlag" mat-raised-button	type="submit" color="primary" [disabled]="myForm.invalid">
+        Update
+      </button>
+</form>
+
